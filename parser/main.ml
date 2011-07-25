@@ -9,8 +9,8 @@ let main () =
       try
         match Mondrian.input Lexer.token lexbuf with
           | Nil -> print_endline "empty file!"
-          | Horiz(lst) -> print_endline "got horiz buffer"
-          | Vert(lst) -> print_endline "got vert buffer"
+          | Horiz(lst) -> print_divset lst
+          | Vert(lst) -> print_divset lst
       with Parsing.Parse_error -> print_endline "parse error!"; flush stdout; exit 1
 	with End_of_file -> exit 0
       
