@@ -1,5 +1,5 @@
 mondrian: mondrian.cmo lexer.cmo main.cmo div.cmo
-	ocamlc -o mondrian str.cma mondrian.cmo lexer.cmo main.cmo div.cmo
+	ocamlc -o mondrian str.cma mondrian.cmo lexer.cmo div.cmo main.cmo
 
 mondrian.cmo: mondrian.mly div.cmo
 	ocamlyacc mondrian.mly
@@ -12,7 +12,7 @@ lexer.cmo: lexer.mll mondrian.cmo
 	ocamllex lexer.mll
 	ocamlc -c lexer.ml
 
-main.cmo: main.ml mondrian.cmo lexer.cmo
+main.cmo: main.ml mondrian.cmo lexer.cmo div.cmo
 	ocamlc -c main.ml
 
 div.cmo: div.ml
