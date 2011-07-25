@@ -17,7 +17,7 @@ open Div
 %% /* Grammar rules and actions follow */
 
 input:    /* empty */		{ Nil }
-        | divs { Vert(List.rev $1)} 
+        | chompnl divs { Vert(List.rev $2)} 
 ;
 
 terminator:   NEWLINE  { }
@@ -52,7 +52,11 @@ size: { Free }
 
 optionlist: { [] }
             | ID { [$1] }
+            | STRING { [$1] }
+            | SIZE { [$1] }
             | optionlist ID { $2 :: $1 }
+            | optionlist STRING { $2 :: $1 }
+            | optionlist SIZE { $2 :: $1 }
 ;
 
 adiv : ID size optionlist enclosedseq terminator { printf "nabbed a div!\n"; flush stdout; ($1,$2,List.rev $3,$4) }
