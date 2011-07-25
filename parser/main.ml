@@ -2,8 +2,33 @@
 (* Assumes the parser file is "mondrian.mly" and the lexer file is "lexer.mll". *)
 
 open Div
+open Printf
+
+
+type outputmodes = Dump | Xhtml
+
+let usage = sprintf "usage: %s [options] < input > output" (Filename.basename Sys.argv.(0))
+let outputmode = ref Dump
+let args = ref []
+
+let speclist = [
+  ("-m", Arg.String (fun (txt) -> match txt with
+    | "dump" -> outputmode := Dump
+    | "xhtml" -> begin
+      print_endline "xhtml output is not supported yet!";
+      exit 1
+    end
+    | _ -> begin
+      raise (Arg.Bad (sprintf "%s is not a supported output format" txt))
+    end
+  ), ": set output mode (currently only 'dump' is supported");
+  ("--", Arg.Rest (fun arg -> args := !args @ [arg]), ": stop interpreting options")
+]
+
 
 let main () =
+  let collect arg = args := !args @ [arg] in
+  let _ = Arg.parse speclist collect usage in
 	try
 		let lexbuf = Lexing.from_channel stdin in
       try
