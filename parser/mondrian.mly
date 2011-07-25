@@ -45,7 +45,7 @@ size: { Free }
           | Str.Delim c -> c
           | Str.Text c -> c
         ) 
-        (Str.full_split (Str.regexp "ex\\|em\\|px\\|%") $1) in
+        (Str.full_split (Str.regexp "ex\\|em\\|px\\|%\\|in\\|cm\\|mm\\|pt\\|pc") $1) in
         Size((float_of_string (List.nth mylist 0)),(List.nth mylist 1))
          }
 ;
@@ -59,7 +59,7 @@ optionlist: { [] }
             | optionlist SIZE { $2 :: $1 }
 ;
 
-adiv : ID size optionlist enclosedseq terminator { printf "nabbed a div!\n"; flush stdout; ($1,$2,List.rev $3,$4) }
+adiv : ID size optionlist enclosedseq terminator { ($1,$2,List.rev $3,$4) }
 ;
 
 %%
