@@ -3,21 +3,19 @@
 
 open Div
 open Printf
+open Xhtml
 
 
 type outputmodes = Dump | Xhtml
 
 let usage = sprintf "usage: %s [options] < input > output" (Filename.basename Sys.argv.(0))
-let outputmode = ref Dump
+let outputmode = ref Xhtml
 let args = ref []
 
 let speclist = [
   ("-m", Arg.String (fun (txt) -> match txt with
     | "dump" -> outputmode := Dump
-    | "xhtml" -> begin
-      print_endline "xhtml output is not supported yet!";
-      exit 1
-    end
+    | "xhtml" -> outputmode := Xhtml
     | _ -> begin
       raise (Arg.Bad (sprintf "%s is not a supported output format" txt))
     end
@@ -25,6 +23,9 @@ let speclist = [
   ("--", Arg.Rest (fun arg -> args := !args @ [arg]), ": stop interpreting options")
 ]
 
+let print_lst lst = match outputmode with
+  | Dump -> print_divset lst
+  | Xhtml -> print_endline (xhtml_string_divset lst)
 
 let main () =
   let collect arg = args := !args @ [arg] in
@@ -34,8 +35,8 @@ let main () =
       try
         match Mondrian.input Lexer.token lexbuf with
           | Nil -> print_endline "empty file!"
-          | Horiz(lst) -> print_divset lst
-          | Vert(lst) -> print_divset lst
+          | Horiz(lst) -> print_lst lst
+          | Vert(lst) -> print_lst lst
       with Parsing.Parse_error -> print_endline "parse error!"; flush stdout; exit 1
 	with End_of_file -> exit 0
       
