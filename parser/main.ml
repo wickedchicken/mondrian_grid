@@ -33,7 +33,11 @@ let print_lst lst = match !outputmode with
   | Xhtml -> begin
         match lst with
           | Nil -> print_endline "empty file!"
-          | _ -> print_endline (xhtml_string_divset lst)
+          | _ -> begin
+            print_endline xhtml_hdr;
+            print_endline (xhtml_string_divset lst);
+            print_endline xhtml_ftr
+          end
   end
 
 let main () =
