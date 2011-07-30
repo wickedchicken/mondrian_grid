@@ -7,6 +7,11 @@ let sizetostr size = match size with
 
 let style sz = "position:relative;float:left;" ^ (sizetostr sz)
 
+let bgcolor =
+  let randcolor = (Random.int (256 * 256 * 256)) in
+  let hexcolor = Printf.sprintf "#%06x" randcolor in
+  "background-color:" ^ hexcolor ^ ";"
+
 let rec xhtml_string_div styleoptz div = match div with (id,sz,_,ds) -> begin
     let divhdr = divhdr id ((style sz) ^ styleoptz) in
     let body = "<p>" ^ id ^ "</p>" in
@@ -16,8 +21,8 @@ let rec xhtml_string_div styleoptz div = match div with (id,sz,_,ds) -> begin
   end
 and xhtml_string_divset ds = match ds with
   | Nil -> ""
-  | Vert(divs) -> String.concat "" (List.map (xhtml_string_div "clear:left;") divs)
-  | Horiz(divs) -> String.concat "" (List.map (xhtml_string_div "") divs)
+  | Vert(divs) -> String.concat "" (List.map (xhtml_string_div ("clear:left;" ^ bgcolor)) divs)
+  | Horiz(divs) -> String.concat "" (List.map (xhtml_string_div bgcolor) divs)
 
 let xhtml_hdr = 
   "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
