@@ -1,6 +1,6 @@
 (* file: lexer.mll *)
 {
-  open Mondrian (* Assumes the parser file is "rpcalc.mly". *)
+  open Mondrian (* Assumes the parser file is "lexer.mly". *)
   open Printf
 }
 let digit = ['0'-'9']
