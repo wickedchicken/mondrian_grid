@@ -18,3 +18,16 @@ and xhtml_string_divset ds = match ds with
   | Nil -> ""
   | Vert(divs) -> String.concat "" (List.map (xhtml_string_div "clear:left;") divs)
   | Horiz(divs) -> String.concat "" (List.map (xhtml_string_div "") divs)
+
+let xhtml_hdr = 
+  "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
+  <html xmlns=\"http://www.w3.org/1999/xhtml\">
+  <head>
+  <title>title</title>
+  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+  <link rel=\"stylesheet\" type=\"text/css\" href=\"splash.css\" media=\"screen\" />
+  </head>
+  <body>"
+
+let xhtml_ftr =
+  "</body></html>"
