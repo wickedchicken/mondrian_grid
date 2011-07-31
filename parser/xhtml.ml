@@ -3,7 +3,7 @@ open Div
 let divhdr id style = "<div id=\"" ^ id ^ "\" style=\"" ^ style ^ "\">"
 let sizetostr size = match size with
   | Free -> ""
-  | Size(fl,str) -> "size:" ^ (string_of_float fl) ^ str ^ ";"
+  | Size(fl,str) -> "width:" ^ (Printf.sprintf "%f" fl) ^ str ^ ";"
 
 let style sz = "position:relative;float:left;" ^ (sizetostr sz)
 
