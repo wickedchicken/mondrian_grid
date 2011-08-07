@@ -90,7 +90,7 @@ Mondrian expects the computer to do the heavy lifting, not you. Mondrian automat
 Verification
 ------------
 
-The advantage of Mondrian's view of a page over traditional CSS is Mondrian can verify several things about your layout. For example, it can prefent a 600px wide div from being nested inside a 500px one. It can verify that there is only one freely-sized div within a context, preventing unpredictable lengths or strange resizings of pages when switching resolutions. Mondrian catches these design problems at "compile time" and can go a long way toward creating cross-browser repeatable layouts with minimal fuss.
+The advantage of Mondrian's view of a page over traditional CSS is Mondrian can verify several things about your layout. For example, it can prevent a 600px wide div from being nested inside a 500px one. It can verify that there is only one freely-sized div within a context, preventing unpredictable lengths or strange resizings of pages when switching resolutions. Mondrian catches these design problems at "compile time" and can go a long way toward creating cross-browser repeatable layouts with minimal fuss.
 
 Getting Started
 --------
